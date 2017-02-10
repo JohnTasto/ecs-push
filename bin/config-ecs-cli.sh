@@ -1,23 +1,22 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
 # Download, Install and Configure ecs-cli
 
-#set the environment variables
 source ./bin/env.sh
 
-#Delete old ecs-cli config file if it exists
 rm -rf ~/.ecs/config
 
-#Download the correct cli for your os
+# Download correct CLI for your OS
 if [ "$(uname)" == "Darwin" ]; then
   # Get the Mac binaries
-  sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-darwin-amd64-latest
+  curl -o ./bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-darwin-amd64-latest
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
   #Get the L binaries
-  sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+  curl -o ./bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
 fi
-sudo chmod +x /usr/local/bin/ecs-cli
+chmod +x ./bin/ecs-cli
 
-ecs-cli configure \
+./bin/ecs-cli configure \
   --region $AWS_REGION \
   --access-key $AWS_ACCESS_KEY \
   --secret-key $AWS_SECRET_KEY  \
