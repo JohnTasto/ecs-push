@@ -10,5 +10,5 @@ if [ "$TRAVIS_BRANCH" == "master" ]; then
   echo "docker push..."
   docker push "$DOCKER_REPO"/"$DOCKER_WEB_IMAGE":latest
   echo "ecs-cli compose..."
-  ecs-cli compose --project-name "$ECS_PROJECT" --file ecs-deploy.yml service up;
+  ./bin/ecs-cli compose --project-name "$ECS_PROJECT" --file ecs-deploy.yml service up;
 fi
